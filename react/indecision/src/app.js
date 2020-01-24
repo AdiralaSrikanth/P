@@ -1,0 +1,59 @@
+//we write JSX in this file
+console.log('app.js is running')
+
+// var user = {
+//     name: 'andy',
+//     age: 26,
+//     location: 'philly'
+// }
+
+// function getLocation(location) {
+//     if(location){
+//     return <p>location: {user.location}</p>
+//     }
+// }
+// var templateTwo = (
+//     <div>
+//        <h1> {user.name ? user.name.toUpperCase() : 'Anonymous'}</h1>
+//         {(user.age && user.age >= 18) && <p>{user.age}</p>}
+//         {getLocation(user.location)}
+//     </div>
+// )
+
+
+var app = {
+    title: 'Indecision App',
+    subTitle: 'Put your life in the hands of a computer',
+    options: ['one', 'two']
+}
+
+var templateTwo = (
+    <div>
+        <h1>{app.title}</h1>
+        {app.subTitle && <p>{app.subTitle}</p>}
+        {(app.options.length >0) ? 'Here are your options' : 'No options' }
+    </div>
+)
+
+
+
+
+
+var appRoot = document.getElementById('app')
+
+ReactDOM.render(templateTwo, appRoot)
+
+
+
+
+
+// var template = (
+//     <div>
+//         <h1>Indecision App</h1>
+//         <p>This is some info</p>
+//         <ul>
+//             <li>{user.name.toUpperCase()}</li>
+//             <li>{user.profession}</li>
+//         </ul>
+//     </div>
+// );

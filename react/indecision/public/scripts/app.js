@@ -1,61 +1,33 @@
 'use strict';
 
-//we write JSX in this file
-console.log('app.js is running');
+var visibility = false;
 
-// var user = {
-//     name: 'andy',
-//     age: 26,
-//     location: 'philly'
-// }
-
-// function getLocation(location) {
-//     if(location){
-//     return <p>location: {user.location}</p>
-//     }
-// }
-// var templateTwo = (
-//     <div>
-//        <h1> {user.name ? user.name.toUpperCase() : 'Anonymous'}</h1>
-//         {(user.age && user.age >= 18) && <p>{user.age}</p>}
-//         {getLocation(user.location)}
-//     </div>
-// )
-
-
-var app = {
-    title: 'Indecision App',
-    subTitle: 'Put your life in the hands of a computer',
-    options: ['one', 'two']
+var showDetails = function showDetails() {
+    visibility = !visibility;
+    render();
+};
+var render = function render() {
+    var templateTwo = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            'Toggle Bar'
+        ),
+        React.createElement(
+            'button',
+            { onClick: showDetails },
+            visibility ? 'Hide details' : 'Show details'
+        ),
+        React.createElement(
+            'p',
+            null,
+            visibility && 'Education, Profile and native place'
+        )
+    );
+    ReactDOM.render(templateTwo, appRoot);
 };
 
-var templateTwo = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        app.title
-    ),
-    app.subTitle && React.createElement(
-        'p',
-        null,
-        app.subTitle
-    ),
-    app.options.length > 0 ? 'Here are your options' : 'No options'
-);
-
 var appRoot = document.getElementById('app');
-
-ReactDOM.render(templateTwo, appRoot);
-
-// var template = (
-//     <div>
-//         <h1>Indecision App</h1>
-//         <p>This is some info</p>
-//         <ul>
-//             <li>{user.name.toUpperCase()}</li>
-//             <li>{user.profession}</li>
-//         </ul>
-//     </div>
-// );
+render();

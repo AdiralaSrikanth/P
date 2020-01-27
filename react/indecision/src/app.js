@@ -28,6 +28,7 @@ const render = () => {
         <div>
             <h1>{app.title}</h1>
             {app.subTitle && <p>{app.subTitle}</p>}
+            
             <p>{(app.options.length >0) ? 'Here are your options' : 'No options' }</p>
            <p> {app.options.length}</p>
            <button disabled={app.options.length === 0} onClick={selectOption}>what should I select?</button>

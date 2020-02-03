@@ -7,7 +7,6 @@ const databaseName = 'task-manager'
 const id = new ObjectID()
 console.log(id.getTimestamp())
 
-
 MongoClient.connect(connectionUrl,{useNewUrlParser: true}, (err,client)=>{
         if(err) {
             return console.log('Unable to connect to database')

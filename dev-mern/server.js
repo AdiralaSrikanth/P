@@ -1,44 +1,36 @@
 const express = require('express')
 const app = express()
+const port = process.env.PORT || 3000
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const passport = require('passport')
-
-//Middlewares
-app.use(bodyParser.urlencoded({urlencoded: false}))
-app.use(bodyParser.json())
-
-//Load in passport and initialize
-app.use(passport.initialize())
-
-
-//Routes
-const users = require('./routes/api/users')
+const user = require('./routes/api/user')
 const profile = require('./routes/api/profile')
 const posts = require('./routes/api/posts')
 
-require('./config/passport')(passport)
 
-(function(passport){})(passport)
+mongoose.connect('mongodb://localhost:27017/social-app' , { useNewUrlParser: true})
+    .then(() => {
+        console.log('database connected.')
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended : false}))
 
-app.use('/api/users', users)
+// parse application/json
+app.use(bodyParser.json())
+
+app.use('/api/users', user)
 app.use('/api/profile', profile)
 app.use('/api/posts', posts)
 
-const port = process.env.PORT || 5000 
 
-mongoose.connect('mongodb://127.0.0.1:27017/dev-connector')
-.then(()=>{
-        console.log('connected to db')
-}).catch((e)=>{
-    console.log(e)
+
+app.get('*', (req,res)=>{
+    res.json({msg: 404})
 })
 
-
-
-
-
-
-app.listen(port, ()=>{
-    console.log(`Listening at port ${port}`)
+app.listen(port, () => {
+    console.log(`listening at port ${port}`)
 })

@@ -7,7 +7,6 @@ const user = require('./routes/api/user')
 const profile = require('./routes/api/profile')
 const posts = require('./routes/api/posts')
 
-
 mongoose.connect('mongodb://localhost:27017/social-app' , { useNewUrlParser: true})
     .then(() => {
         console.log('database connected.')
@@ -24,7 +23,6 @@ app.use(bodyParser.json())
 app.use('/api/users', user)
 app.use('/api/profile', profile)
 app.use('/api/posts', posts)
-
 
 
 app.get('*', (req,res)=>{
